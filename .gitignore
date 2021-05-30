@@ -1,0 +1,9 @@
+front/node_modules
+front/.DS_Store
+front/dist
+front/dist-ssr
+front/*.local
+front/node_modules
+back/node_modules
+back/package-lock.json
+front/package-lock.json
