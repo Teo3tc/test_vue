@@ -6,7 +6,12 @@ export const useMainStore = defineStore({
     // a function that returns a fresh state
     state: () => ({
         categorie: [],
-        products:[],      
+        products:[],
+        panier:[],
+        nbrItem:0,
+        loading:true, 
+        total:0,
+
     }),
     // optional getters
     getters: {
@@ -34,14 +39,22 @@ export const useMainStore = defineStore({
             try{
                 const response = await fetch(url);
                 const res = await response.json();
-                this.products.push(res)             
-
-              
+                res.forEach(r => this.products.push(r))                            
             }catch(e){
                 console.log(e)
             }
+            this.loading = false
         },
-    
+        addInPanier(item){
+            this.total += item.price
+            this.nbrItem += 1
+            this.panier.push(item)
+        },
+        remove(item){
+            this.nbrItem -=1
+            this.total -= item.price
+            this.panier.slice(item.index,1)
+        }
 
     },
   })

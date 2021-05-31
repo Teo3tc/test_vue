@@ -1,4 +1,5 @@
 <template>
+  <Cart/>
   <main id="example-1">
     <Categ v-for="item in main.categorie" :key="item.id" :id="item.id" :label="item.label">
     </Categ>
@@ -6,25 +7,23 @@
 </template>
 
 <script >
-import { onMounted } from 'vue'
+import { onMounted,ref } from 'vue'
 import { useMainStore } from './stores/main'
 import Categ from './components/Categ.vue'
-
+import Cart from './components/Cart.vue'
 export default {
  components: {
-    Categ
+    Categ,
+    Cart
   },
   setup() {
     const main = useMainStore()
-    function addCateg(){
-      main.fetcheCateg('http://localhost:3200/categories')
-    }
-    function addProduct(){
-            main.fetcheProduct('http://localhost:3200/products')
+    async function fetchdData(){
+      await main.fetcheCateg('http://localhost:3200/categories')
+      await main.fetcheProduct('http://localhost:3200/products')
     }
     onMounted(()=>{
-      addCateg()
-      addProduct()
+      fetchdData()
     })
     return{main}
   },
