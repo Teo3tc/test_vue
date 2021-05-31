@@ -2,6 +2,7 @@
 Teste Technique make with VUE
 
 - Date : 31/05/21
+- no style
 
 ## Instalation
 
